@@ -35,8 +35,8 @@ def split_path(path):
 
 if __name__ == "__main__":
   PARSER = ArgumentParser(
-    description="Renders a template using command line argument or " +
-                "environment variables."
+    description="Renders a Jinja2 template using command line arguments or " +
+                "environment variables as parameters for the template."
   )
   PARSER.add_argument(
     "--source", required=True,
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     help="The path to the destination file."
   )
   PARSER.add_argument(
-    "--parameters-source", required=True,
+    "--parameters-source", choices=["environment", "cli"], required=True,
     help="The source of the parameters for the template. The options " +
          "are 'environment' if you want to use the environment variables " +
          "as parameters or 'cli' if you want to pass in the parameters " +
@@ -56,7 +56,8 @@ if __name__ == "__main__":
   )
   PARSER.add_argument(
     "--parameter", nargs="*", required=False,
-    help="A parameter to pass into the template renderer."
+    help="A parameter to pass into the template renderer if the " +
+         "parameters-source is 'cli'."
   )
   ARGS = PARSER.parse_args()
   # Load the parameters.

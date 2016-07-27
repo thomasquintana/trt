@@ -20,7 +20,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="templator",
+    name="trt",
     version="1.0.0",
     packages=find_packages('src'),
     package_dir={'':'src'},
@@ -29,10 +29,10 @@ setup(
     author="Thomas Quintana",
     author_email="quintana.thomas@gmail.com",
     license="Apache License 2.0",
-    url="https://github.com/thomasquintana/templator",
+    url="https://github.com/thomasquintana/trt",
     entry_points={
         'console_scripts': [
-          'templator = templator.tool:main',
+          'trt = trt.tool:main',
         ]
     }
 )
