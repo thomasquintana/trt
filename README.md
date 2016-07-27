@@ -12,10 +12,10 @@ $] python setup.py install
 
 **Usage:**
 ```
-$] python tool.py --help
-usage: tool.py [-h] --source SOURCE --destination DESTINATION
-               --parameters-source {environment,cli}
-               [--parameter [PARAMETER [PARAMETER ...]]]
+$] trt --help
+usage: trt [-h] --source SOURCE --destination DESTINATION
+           --parameters-source {environment,cli}
+           [--parameter [PARAMETER [PARAMETER ...]]]
 
 Renders a Jinja2 template using command line arguments or environment
 variables as parameters for the template.
