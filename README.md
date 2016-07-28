@@ -17,27 +17,25 @@ $] python setup.py install
 
 **Usage:**
 ```
-$] trt --help
-usage: trt [-h] --source SOURCE --destination DESTINATION
-           --parameters-source {environment,cli}
-           [--parameter [PARAMETER [PARAMETER ...]]]
+$] trt -h
+usage: trt [-h] -s SOURCE -d DESTINATION -ps {environment,cli}
+           [-p [PARAMETERS [PARAMETERS ...]]]
 
 Renders a [Jinja2](http://jinja.pocoo.org/docs/dev/) template using command line arguments or environment
 variables as parameters for the template.
 
 optional arguments:
   -h, --help            show this help message and exit
-  --source SOURCE       The path to the source template.
-  --destination DESTINATION
-                        The path to the destination file.
-  --parameters-source {environment,cli}
+  -s SOURCE             The path to the source template.
+  -d DESTINATION        The path to the destination file.
+  -ps {environment,cli}
                         The source of the parameters for the template. The
                         options are 'environment' if you want to use the
                         environment variables as parameters or 'cli' if you
                         want to pass in the parameters as arguments to this
                         script. Note: All parameter names are converted to
-                        lower case irrelevant of of the parameters source.
-  --parameter [PARAMETER [PARAMETER ...]]
+                        lower case irrelevant of the parameters source.
+  -p [PARAMETERS [PARAMETERS ...]]
                         A parameter to pass into the template renderer if the
                         parameters-source is 'cli'.
 ```
