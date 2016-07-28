@@ -37,5 +37,5 @@ optional arguments:
                         lower case irrelevant of the parameters source.
   -p [PARAMETERS [PARAMETERS ...]]
                         A parameter to pass into the template renderer if the
-                        parameters-source is 'cli'.
+                        parameters-source is 'cli'. (e.g. -p name=value)
 ```
