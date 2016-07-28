@@ -21,7 +21,7 @@ $] trt -h
 usage: trt [-h] -s SOURCE -d DESTINATION -ps {environment,cli}
            [-p [PARAMETERS [PARAMETERS ...]]]
 
-Renders a [Jinja2](http://jinja.pocoo.org/docs/dev/) template using command line arguments or environment
+Renders a Jinja2 template using command line arguments or environment
 variables as parameters for the template.
 
 optional arguments:
