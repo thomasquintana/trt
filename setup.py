@@ -17,22 +17,19 @@
 #
 # Thomas Quintana <quintana.thomas@gmail.com>
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
-    name="trt",
-    version="1.0.0",
-    packages=find_packages('src'),
-    package_dir={'':'src'},
-    install_requires=['jinja2 == 2.8'],
-    include_package_data=True,
-    author="Thomas Quintana",
-    author_email="quintana.thomas@gmail.com",
-    license="Apache License 2.0",
-    url="https://github.com/thomasquintana/trt",
-    entry_points={
-        'console_scripts': [
-          'trt = trt.tool:main',
-        ]
-    }
+  name="trt",
+  version="1.0.0",
+  packages=['trt'],
+  install_requires=['jinja2==2.8'],
+  include_package_data=True,
+  author="Thomas Quintana",
+  author_email="quintana.thomas@gmail.com",
+  license="Apache License 2.0",
+  url="https://github.com/thomasquintana/trt",
+  entry_points={
+    'console_scripts': ['trt = trt.__main__:main']
+  }
 )

@@ -1,9 +1,14 @@
 Template Rendering Tool
 =======================
 
-A tool to render Jinja2 templates using the command line interface or environment variables. This tool is useful when templating complex configuration files and matching text with sed is a nightmare!
+A tool to render [Jinja2](http://jinja.pocoo.org/docs/dev/) templates using the command line interface or environment variables. This tool is useful when templating complex configuration files and matching text with sed is a nightmare!
 
-**Install:**
+**Install using pip:**
+```
+$] sudo pip install trt
+```
+
+**Install using setuptools:**
 ```
 $] git clone https://github.com/thomasquintana/trt.git
 $] cd trt
@@ -17,7 +22,7 @@ usage: trt [-h] --source SOURCE --destination DESTINATION
            --parameters-source {environment,cli}
            [--parameter [PARAMETER [PARAMETER ...]]]
 
-Renders a Jinja2 template using command line arguments or environment
+Renders a [Jinja2](http://jinja.pocoo.org/docs/dev/) template using command line arguments or environment
 variables as parameters for the template.
 
 optional arguments:
