@@ -23,8 +23,13 @@ from argparse import ArgumentParser
 
 from jinja2 import Environment, FileSystemLoader
 
-def to_lowercase_keys(dictionary):
-  return {k.lower(): v for k, v in dictionary.iteritems()}
+def to_lowercase_keys(parameters):
+  if isinstance(parameters, list):
+    return {k.lower(): v for k, v in [p.split("=") for p in parameters]}
+  elif isinstance(parameters, dict):
+    return {k.lower(): v for k, v in parameters.iteritems()}
+  else:
+    raise ValueError("Invalid type for parameters.")
 
 def split_path(path):
   split_point = path.rfind("/")
@@ -39,43 +44,40 @@ if __name__ == "__main__":
                 "environment variables as parameters for the template."
   )
   PARSER.add_argument(
-    "--source", required=True,
+    "-s", dest="SOURCE", required=True,
     help="The path to the source template."
   )
   PARSER.add_argument(
-    "--destination", required=True,
+    "-d", dest="DESTINATION", required=True,
     help="The path to the destination file."
   )
   PARSER.add_argument(
-    "--parameters-source", choices=["environment", "cli"], required=True,
+    "-ps", dest="PARAMETER_SOURCE", choices=["environment", "cli"], required=True,
     help="The source of the parameters for the template. The options " +
          "are 'environment' if you want to use the environment variables " +
          "as parameters or 'cli' if you want to pass in the parameters " +
          "as arguments to this script. Note: All parameter names are " +
-         "converted to lower case irrelevant of of the parameters source."
+         "converted to lower case irrelevant of the parameters source."
   )
   PARSER.add_argument(
-    "--parameter", nargs="*", required=False,
+    "-p", dest="PARAMETERS", nargs="*", required=False,
     help="A parameter to pass into the template renderer if the " +
          "parameters-source is 'cli'."
   )
   ARGS = PARSER.parse_args()
   # Load the parameters.
   PARAMETERS = None
-  if ARGS["parameters-source"] == "cli":
-    PARAMETERS = ARGS["parameter"]
-  elif ARGS["parameters-source"] == "environment":
-    PARAMETERS = os.environ
-  else:
-    print "Invalid parameters source."
-    exit(-1)
+  if ARGS.PARAMETER_SOURCE == "cli":
+    PARAMETERS = ARGS.PARAMETERS
+  elif ARGS.PARAMETER_SOURCE == "environment":
+    PARAMETERS = dict(os.environ)
   PARAMETERS = to_lowercase_keys(PARAMETERS)
   # Load the templates.
-  FOLDER_NAME, FILE_NAME = split_path(ARGS["source"])
+  FOLDER_NAME, FILE_NAME = split_path(ARGS.SOURCE)
   LOADER = FileSystemLoader(FOLDER_NAME)
   TEMPLATES = Environment(loader=LOADER)
   # Render the template.
   TEMPLATE = TEMPLATES.get_template(FILE_NAME).render(PARAMETERS)
   # Write the rendered template to disk.
-  with open(ARGS["destination"], "wb") as output:
+  with open(ARGS.DESTINATION, "wb") as output:
     output.write(TEMPLATE)
